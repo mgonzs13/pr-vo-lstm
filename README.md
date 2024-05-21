@@ -42,6 +42,6 @@ $ python3 val.py
 
 <img src="./docs/validation_tool.png" width="100%" />
 
-## Validation
+## Results
 
 Put your results here showing the graphs got from [TUM online validation tool](https://cvg.cit.tum.de/data/datasets/rgbd-dataset/online_evaluation).
