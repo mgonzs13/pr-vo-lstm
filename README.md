@@ -3,7 +3,6 @@
 ## Installation
 
 ```shell
-$ git clone https://github.com/mgonzs13/vo_lstm
 $ pip3 install -r requirements.txt
 ```
 
