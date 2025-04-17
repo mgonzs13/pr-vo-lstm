@@ -12,7 +12,7 @@ class VisualOdometryModel(nn.Module):
         hidden_size: int,
         num_layers: int,
         bidirectional: bool = False,
-        lstm_dropout: float = 0.2
+        lstm_dropout: float = 0.2,
     ) -> None:
 
         super(VisualOdometryModel, self).__init__()

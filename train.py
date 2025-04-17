@@ -1,4 +1,3 @@
-
 import torch
 from tqdm import tqdm
 from torch.utils.data import DataLoader
@@ -12,17 +11,14 @@ from params import *
 # Create the visual odometry model
 model = VisualOdometryModel(hidden_size, num_layers)
 
-transform = T.Compose([
-    T.ToTensor(),
-    model.resnet_transforms()
-])
-
 
 # TODO: Load the dataset
+transform = T.Compose([T.ToTensor(), model.resnet_transforms()])
+
 train_loader = ...
 
 
-# train
+# Train the model
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
@@ -39,8 +35,7 @@ for epoch in range(epochs):
         # TODO: Train the model
         ...
 
-    print(
-        f"Epoch [{epoch+1}/{epochs}], Loss: {running_loss / len(train_loader)}")
+    print(f"Epoch [{epoch+1}/{epochs}], Loss: {running_loss / len(train_loader)}")
     running_loss = 0.0
 
 

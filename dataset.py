@@ -1,4 +1,3 @@
-
 import os
 import cv2
 import torch
@@ -13,14 +12,18 @@ class VisualOdometryDataset(Dataset):
         self,
         dataset_path: str,
         transform: Callable,
+        sequence_move: int,
         sequence_length: int,
-        validation: bool = False
+        validation: bool = False,
     ) -> None:
 
         self.sequences = []
 
-        directories = [d for d in os.listdir(
-            dataset_path) if os.path.isdir(os.path.join(dataset_path, d))]
+        directories = [
+            d
+            for d in os.listdir(dataset_path)
+            if os.path.isdir(os.path.join(dataset_path, d))
+        ]
 
         for subdir in directories:
 
@@ -32,11 +35,13 @@ class VisualOdometryDataset(Dataset):
             if not validation:
                 ground_truth_data = self.read_ground_truth(aux_path)
                 interpolated_ground_truth = self.interpolate_ground_truth(
-                    rgb_paths, ground_truth_data)
+                    rgb_paths, ground_truth_data
+                )
 
             # TODO: create sequences
 
         self.transform = transform
+        self.sequence_move = sequence_move
         self.sequence_length = sequence_length
         self.validation = validation
 
@@ -91,9 +96,7 @@ class VisualOdometryDataset(Dataset):
         return ground_truth_data
 
     def interpolate_ground_truth(
-            self,
-            rgb_paths: Tuple[float, str],
-            ground_truth_data: Tuple[float, Tuple[float]]
+        self, rgb_paths: Tuple[float, str], ground_truth_data: Tuple[float, Tuple[float]]
     ) -> Tuple[float, Tuple[float]]:
 
         rgb_timestamps = [rgb_path[0] for rgb_path in rgb_paths]
@@ -105,7 +108,8 @@ class VisualOdometryDataset(Dataset):
         for rgb_timestamp in rgb_timestamps:
 
             nearest_idx = np.argmin(
-                np.abs(np.array(ground_truth_timestamps) - rgb_timestamp))
+                np.abs(np.array(ground_truth_timestamps) - rgb_timestamp)
+            )
 
             interpolated_position = ground_truth_data[nearest_idx]
             interpolated_ground_truth.append(interpolated_position)

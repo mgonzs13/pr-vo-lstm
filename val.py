@@ -1,4 +1,3 @@
-
 import torch
 from tqdm import tqdm
 from torch.utils.data import DataLoader
@@ -12,28 +11,25 @@ from params import *
 # Create the visual odometry model
 model = VisualOdometryModel(hidden_size, num_layers)
 
-transform = T.Compose([
-    T.ToTensor(),
-    model.resnet_transforms()
-])
-
 
 # TODO: Load dataset
-train_loader = ...
+transform = T.Compose([T.ToTensor(), model.resnet_transforms()])
+
+validation_dataloader = ...
 
 
 # val
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 model.to(device)
-model.load_state_dict(torch.load("vo.pt"))
+model.load_state_dict(torch.load("vo.pt", weights_only=True))
 model.eval()
 
 validation_string = ""
 position = [0.0] * 7
 
 with torch.no_grad():
-    for images, labels, timestamp in tqdm(train_loader, f"Validating:"):
+    for images, labels, timestamps in tqdm(validation_dataloader, f"Validating:"):
 
         images = images.to(device)
         labels = labels.to(device)
