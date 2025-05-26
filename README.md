@@ -43,4 +43,11 @@ $ python3 val.py
 
 ## Results
 
-Put your results here showing the graphs got from [TUM online validation tool](https://cvg.cit.tum.de/data/datasets/rgbd-dataset/online_evaluation).
+Present the results obtained using the [TUM Online Validation Tool](https://cvg.cit.tum.de/data/datasets/rgbd-dataset/online_evaluation) in this section.
+
+Experiment with **three** different configurations. For each configuration:
+
+- **Upload the parameter** to the README.
+- Include the resulting **graphs** below for comparison.
+
+Make sure to clearly label each configuration and discuss any notable differences or observations based on the results.
